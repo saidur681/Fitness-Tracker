@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html data-theme="light" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Navbar</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container">
+      <a class="navbar-brand" href="/">Fitness Tracker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto" id="navigate">
+          <li class="nav-item">
+            <a class="nav-link" href="/meals">Meals</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/exercises">Exercises</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+          </li>
+          <li class="nav-item" id="registerNavItem">
+            <a class="nav-link px-2 ml-2" id="registerBtn" href="/register">Register</a>
+          </li>
+          <li class="nav-item" id="loginNavItem">
+            <a class="nav-link px-2 ml-2" id="loginBtn" href="/login">Login</a>
+          </li>
+          <li class="nav-item" id="signoutNavItem">
+            <button class="nav-link btn btn-danger text-white ml-2" id="signoutBtn" style="display: none;">Sign Out</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <script>
+    const registerBtn = document.getElementById('registerBtn');
+    const loginBtn = document.getElementById('loginBtn');
+    const signoutBtn = document.getElementById('signoutBtn');
+
+    if (localStorage.getItem('username')) {
+      document.getElementById('registerNavItem').style.display = 'none';
+      document.getElementById('loginNavItem').style.display = 'none';
+      signoutBtn.style.display = 'inline-block';
+    } else {
+      document.getElementById('registerNavItem').style.display = 'inline-block';
+      document.getElementById('loginNavItem').style.display = 'inline-block';
+      signoutBtn.style.display = 'none';
+    }
+
+    signoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('username');
+      window.location.reload();
+    });
+
+    function signOut() {
+      localStorage.removeItem('username');
+      window.location("/");
+    }
+  </script>
+</body>
+
+</html>
